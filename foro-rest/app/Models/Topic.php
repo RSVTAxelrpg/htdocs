@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Topic extends Model
 {
     protected $fillable = [
-        'title', 'user_id',
+        'id', 'title', 'user_id',
     ];
 
     protected $hidden = [
