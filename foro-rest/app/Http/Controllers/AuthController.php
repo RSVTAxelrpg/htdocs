@@ -21,9 +21,7 @@ class AuthController extends Controller
         if (!Hash::check($r->password, $u->password)) {
             return response()->json(['msg' => 'error'], 401);
         }
-
         $token = JWT::create($u, env('JWT_SECRET_KEY'), env('JWT_EXPIRE'));
-
         return response()->json(['user' => $u, 'token' => $token]);
     }
 }

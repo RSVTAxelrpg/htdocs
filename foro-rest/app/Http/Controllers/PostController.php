@@ -1,56 +1,55 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Client\Request;
 
-use App\Models\Topic;
-use Illuminate\Http\Request;
+use App\Models\Post;
 
-class TopicController extends Controller
+class PostController extends Controller
 {
-    public function index()
-    {
-        return Topic::paginate();
+    public function index(){
+        return Post::paginate();
     }
 
     public function show($id)
     {
-        $topic = Topic::find($id);
-        if (!$topic) {
+        $post = Post::find($id);
+        if (!$post) {
             return response()->json(["message" => "failed"], 404);
         }
-        return $topic;
+        return $post;
     }
 
     public function store(Request $request)
     {
-        $topic = new Topic;
-        $r = $topic->fill($request->all())->save();
+        $post = new Post();
+        $r = $post->fill($request->all())->save();
         if (!$r) {
             return response()->json(["message" => "failed"], 404);
         }
-        return $topic;
+        return $post;
     }
 
     public function update(Request $request, $id)
     {
-        $topic = Topic::find($id);
-        if (!$topic) {
+        $post = Post::find($id);
+        if (!$post) {
             return response()->json(["message" => "failed"], 404);
         }
-        $r = $topic->fill($request->all())->save();
+        $r = $post->fill($request->all())->save();
         if (!$r) {
             return response()->json(["message" => "failed"], 404);
         }
-        return $topic;
+        return $post;
     }
 
     public function destroy($id)
     {
-        $topic = Topic::find($id);
-        if (!$topic) {
+        $post = Post::find($id);
+        if (!$post) {
             return response()->json(["message" => "failed"], 404);
         }
-        $topic->delete();
+        $post->delete();
         return response()->json(["message" => "success"]);
     }
 }
